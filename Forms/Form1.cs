@@ -16,5 +16,20 @@ namespace Forms
         {
             InitializeComponent();
         }
+
+        private void SelectButton_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new OpenFileDialog() { CheckFileExists = true })
+            {
+                if (dialog.ShowDialog() != DialogResult.OK)
+                    return;
+
+                var filePath = dialog.FileName;
+                using (var icon = Icon.ExtractAssociatedIcon(filePath))
+                {
+                    IconPicture.Image = icon.ToBitmap();
+                }
+            }
+        }
     }
 }
